@@ -41,10 +41,12 @@ catch (Exception $e){
 
 if(isset($_POST['connexion'])){
     if (!empty($_POST['email']) && !empty($_POST['password'])){
-        $cosql = $bdd->prepare('SELECT * FROM identifiant WHERE email = ? AND password = ? ');
+        $cosql = $bdd->prepare('SELECT * FROM identifiant WHERE mail = ? AND password = ? ');
         $cosql->execute(array($_POST['email'],$_POST['password']));
         if ($cosql->rowCount()== 1){
-            echo "connexion reussite";
+			header('Location:connecte.php');
+                exit();
+            echo "connexion reussie";
         }
         else{
             echo 'Indentifiants incorrects';
@@ -81,19 +83,14 @@ if(isset($_POST['connexion'])){
 						<span class="btn-show-pass">
 							<i class="zmdi zmdi-eye"></i>
 						</span>
-						<input class="input100" type="password" name="pass">
+						<input class="input100" type="password" name="password">
 						<span class="focus-input100" data-placeholder="Mot de passe"></span>
 					</div>
 
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
-							<div class="login100-form-bgbtn"></div>
-
-                            <button class="login100-form-btn">
-                                <input type="submit" name="connexion"  value="Connexion">
-                            </button>
-
-
+							<!-- <div class="login100-form-bgbtn"></div> -->
+                            <input class ="login100-form-btn" type="submit" name="connexion"  value="Connexion">
 						</div>
 					</div>
 
